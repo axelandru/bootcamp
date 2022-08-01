@@ -8,4 +8,10 @@ b = 2
 
 c = 3
 
+if __name__ == "__main__":
+    print("Please dont do that")
+    raise
+
+
+
 
