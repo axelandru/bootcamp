@@ -12,7 +12,6 @@ def do_twice(func):
 
     return wrapper_do_twice
 
-
 def timer(func):
     """Print the runtime of the decorated function"""
     print("timer")
