@@ -1,0 +1,160 @@
+//exam
+
+SHOW table bootcamp_exam.pilots
+SELECT * FROM bootcamp_exam.pilots
+SHOW table bootcamp_exam.flights
+SHOW table bootcamp_exam.customers
+
+
+//1.1
+CREATE TABLE pilots(
+        pilot_id INT IDENTITY(1,1) PRIMARY KEY DISTKEY ENCODE AZ64,
+        first_name VARCHAR(20) NOT NULL ENCODE LZO,
+        last_name VARCHAR(20) NOT NULL ENCODE LZO,
+        date_of_birth DATE ENCODE AZ64,
+        date_added DATE SORTKEY,
+        age INT ENCODE az64,
+        active_status_yn CHAR(1) DEFAULT 'Y');
+        
+CREATE TABLE flights(
+        flight_id INT IDENTITY(1,1) PRIMARY KEY DISTKEY ENCODE az64,
+        pilot_id INT ENCODE az64 NOT NULL,
+        departure VARCHAR(30) ENCODE lzo NOT NULL,
+        arrival VARCHAR(30) ENCODE lzo NOT NULL,
+        departure_time TIMESTAMP SORTKEY,
+        date_added DATE ENCODE AZ64);
+        
+
+        
+CREATE TABLE customers(
+        client_id INT IDENTITY(1,1) PRIMARY KEY DISTKEY ENCODE az64,
+        first_name VARCHAR(20) ENCODE lzo NOT NULL,
+        last_name VARCHAR(20) ENCODE lzo NOT NULL,
+        date_of_birth DATE ENCODE AZ64,
+        addres VARCHAR(50) ENCODE lzo,
+        age INT ENCODE az64,
+        date_added DATE SORTKEY);
+
+ALTER TABLE flights ADD FOREIGN KEY(pilot_id) REFERENCES pilots(pilot_id)
+
+//1.2
+CREATE VIEW vw_clients_financial AS (SELECT client_id,first_name,last_name,addres,age,date_added FROM customers)
+
+//1.3
+GRANT
+SELECT
+ ON
+    vw_clients_financial TO GROUP finance_group;
+    
+//1.4
+ CREATE VIEW vw_flight_info AS 
+ (SELECT p.first_name, p.last_name,f.departure_time, f.departure || '-' || f.arrival route
+ FROM pilots p INNER JOIN flights f ON p.pilot_id = f.pilot_id)
+
+GRANT SELECT ON vw_flight_info TO GROUP support_group
+
+
+//2.1
+//SELECT DATEDIFF('YR',p.pilot_date_of_birth,CURRENT_DATE) age
+//FROM bootcamp_exam.pilots p 
+//WHERE p.pilot_id = 1;
+
+
+INSERT INTO pilots(first_name,last_name,date_of_birth,date_added,age) 
+SELECT p.pilot_first_name,p.pilot_last_name, p.pilot_date_of_birth, p.inserted_date, DATEDIFF('YR',p.pilot_date_of_birth,CURRENT_DATE) 
+FROM bootcamp_exam.pilots p;
+
+//select * from pilots
+
+//2.2
+INSERT INTO customers(first_name,last_name,date_of_birth,addres,age,date_added) 
+SELECT c.customer_first_name,c.customer_last_name, c.customer_date_of_birth,c.customer_country_of_residence,c.customer_age, c.inserted_date 
+FROM bootcamp_exam.customers c;
+
+UPDATE customers
+SET age = DATEDIFF('YR',date_of_birth,CURRENT_DATE)
+
+UPDATE customers
+SET addres = 'ERROR' WHERE addres IS NULL
+
+UPDATE customers
+SET addres = 'Romania' WHERE addres = 'Brazil'
+
+select * from bootcamp_exam.customers 
+
+//2.3
+select * from bootcamp_exam.flights
+
+
+INSERT INTO flights(pilot_id,departure,arrival,departure_time,date_added) 
+SELECT f.pilot_id,f.flight_start_country, (CASE WHEN f.flight_end_country IS NULL THEN '-' ELSE f.flight_end_country END),to_date(f.flight_date,'YYYY-MM-DD'), f.inserted_date 
+FROM bootcamp_exam.flights f;
+
+
+SELECT * FROM FLIGHTS
+UPDATE flights 
+SET departure = 'ERROR'  WHERE departure = arrival
+
+UPDATE flights 
+SET arrival = 'ERROR'  WHERE departure = 'ERROR'
+
+UPDATE flights 
+SET arrival = 'Romania' WHERE arrival = '-'
+
+
+
+//2.4
+DELETE FROM flights
+WHERE flight_id IN
+(SELECT f.flight_id 
+FROM flights f INNER JOIN pilots p ON f.pilot_id = p.pilot_id
+WHERE f.pilot_id IN (SELECT p.pilot_id FROM pilots p WHERE p.last_name LIKE 'F%'))
+
+
+//SELECT f.flight_id 
+//FROM flights f INNER JOIN pilots p ON f.pilot_id = p.pilot_id
+//WHERE f.pilot_id IN (SELECT p.pilot_id FROM pilots p WHERE p.last_name LIKE 'B%')
+//SELECT p.pilot_id,p.last_name FROM pilots p WHERE p.last_name LIKE 'B%'
+//SELECT * FROM flights
+
+//2.5
+CREATE TABLE customers_backup AS
+SELECT * INTO customers_backup FROM customers WHERE addres = 'ERROR'
+DELETE FROM customers WHERE addres = 'ERROR'
+//select * from customers
+
+SELECT * INTO flights_backup FROM flights WHERE departure = 'ERROR'
+DELETE FROM flights WHERE departure = 'ERROR'
+//select * from flights
+
+
+
+
+//3
+
+//3.1 
+show table bootcamp_exam.tbl_genres
+
+
+SELECT b.genre_id,COUNT(b.book_id) 
+FROM bootcamp_exam.tbl_books b
+GROUP BY b.genre_id HAVING COUNT(b.book_id)>3
+ORDER BY 2 ASC
+
+//3.2
+
+SELECT g.name,AVG(age) 
+FROM bootcamp_exam.tbl_accounts a 
+INNER JOIN bootcamp_exam.tbl_book_rentals br ON a.account_id = br.account_id 
+INNER JOIN bootcamp_exam.tbl_books b ON br.book_id = b.book_id 
+INNER JOIN bootcamp_exam.tbl_genres g ON b.genre_id = g.genre_id
+WHERE (br.date_rented >= '2022-07-01' AND br.date_rented<'2022-07-10' AND g.name = 'Romance') OR (br.date_rented < '2022-07-01' AND g.name = 'Tragedy' )
+GROUP BY g.name
+
+//3.3
+SELECT br.account_id, b.title
+FROM bootcamp_exam.tbl_book_rentals br INNER JOIN bootcamp_exam.tbl_books b ON br.book_id = b.book_id
+WHERE DATEDIFF(day,br.date_rented,CASE WHEN date_returned IS NULL THEN CURRENT_DATE ELSE date_returned END )>7
+
+
+//3.5

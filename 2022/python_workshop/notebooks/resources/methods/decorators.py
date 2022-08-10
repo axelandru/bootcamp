@@ -5,7 +5,7 @@ import time
 def do_twice(func):
     """Run the decorated function twice"""
 
-    @functools.wraps(func)
+    # @functools.wraps(func)
     def wrapper_do_twice(*args, **kwargs):
         func()
         return func()

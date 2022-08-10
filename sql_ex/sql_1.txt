@@ -1,0 +1,1094 @@
+
+
+
+CREATE TABLE
+    laptop14_library.tbl_accounts
+    (
+        account_id INT,
+        first_name VARCHAR(100),
+        last_name VARCHAR(100),
+        age INT,
+        email VARCHAR(50),
+        phone_number VARCHAR(50),
+        CONSTRAINT acc_id PRIMARY KEY(account_id)
+    ) ;
+
+CREATE TABLE
+    laptop14_library.tbl_books
+    (
+        book_id INT PRIMARY KEY,
+        author VARCHAR(100),
+        title VARCHAR(50),
+        genre_id INT,
+        amount INT
+    ) ;
+    
+
+CREATE TABLE
+    laptop14_library.tbl_book_rentals
+    (
+        account_id INT,
+        book_id INT,
+        date_rented DATE,
+        date_returned DATE,
+        details VARCHAR(200),
+        CONSTRAINT books_fk FOREIGN KEY(account_id) REFERENCES  laptop14_library.tbl_accounts(account_id)
+      );
+
+CREATE TABLE
+    laptop14_library.tbl_genres
+    (
+        genre_id INT PRIMARY KEY,
+        name VARCHAR(100),
+        description VARCHAR(200)
+    ) ;
+
+ALTER TABLE laptop14_library.tbl_books add constraint genre_fk FOREIGN KEY(genre_id) references laptop14_library.tbl_genres(genre_id);
+
+
+select * from laptop14_library.tbl_genres;
+select * from laptop14_library.tbl_books;
+select * from laptop14_library.tbl_book_rentals;
+select * from laptop14_library.tbl_accounts;
+
+truncate table  laptop14_library.tbl_genres;
+truncate table  laptop14_library.tbl_books;
+truncate table  laptop14_library.tbl_book_rentals;
+truncate table  laptop14_library.tbl_accounts;
+
+
+--Genres Table
+insert into laptop14_library.tbl_genres values (10,'Adventure', 'Adventure books');
+insert into laptop14_library.tbl_genres values (11,'Sci-Fi', 'Science fiction books');
+insert into laptop14_library.tbl_genres values (12,'Tragedy', 'Tragedy books');
+insert into laptop14_library.tbl_genres values (13,'Classics', 'Classics books');
+insert into laptop14_library.tbl_genres values (14,'Romance', 'Romance books');
+insert into laptop14_library.tbl_genres values (15,'Humor', 'Humor books');
+insert into laptop14_library.tbl_genres values (16,'Crime', 'Crime books');
+insert into laptop14_library.tbl_genres values (17,'Mistery', 'Mistery books');
+
+
+--Books Table
+insert into laptop14_library.tbl_books values (100,'Miguel de Cervantes','Don Quixote',10,2);
+insert into laptop14_library.tbl_books values (101,'Alexandre Dumas','The Three Musketeers',10,4);
+insert into laptop14_library.tbl_books values (102,'Robert Louis Stevenson','Treasure Island',10,6);
+
+insert into laptop14_library.tbl_books values (200,'H.G. Wells','The Time Machine',11,22);
+insert into laptop14_library.tbl_books values (201,'Mary Shelley','Frankenstein',11,14);
+insert into laptop14_library.tbl_books values (202,'Dan Simmons','Hyperion',11,3);
+insert into laptop14_library.tbl_books values (203,'Joe Haldeman','The Forever War',11,3);
+
+insert into laptop14_library.tbl_books values (300,'Aeschylus','The Oresteia',12,32);
+insert into laptop14_library.tbl_books values (301,'William Shakespeare','Hamlet',12,9);
+
+
+insert into laptop14_library.tbl_books values (400,'Louisa May Alcott','Little Women',13,5);
+
+insert into laptop14_library.tbl_books values (500,'Tayari Jones','An American Marriage',14,32);
+insert into laptop14_library.tbl_books values (501,'Amy Byler','The Overdue Life of Amy Byler',14,23);
+insert into laptop14_library.tbl_books values (502,'Julia Quinn','Bridgerton: The Duke & I',14,17);
+insert into laptop14_library.tbl_books values (503,'Sally Thorne','99 Percent Mine: A Novel',14,25);
+insert into laptop14_library.tbl_books values (504,'Talia Hibbert','Take a Hint, Dani Brown: A Novel',14,19);
+
+
+insert into laptop14_library.tbl_books values (600,'Abbi Waxman','The Bookish Life of Nina Hill',15,32);
+insert into laptop14_library.tbl_books values (601,'Richard Roper','How Not to Die Alone',15,14);
+insert into laptop14_library.tbl_books values (602,'Balli Kaur Jaswal','The Unlikely Adventures of the Shergill Sisters',15,31);
+
+
+insert into laptop14_library.tbl_books values (700,'Sarah Weinman','Scoundrel',16,21);
+insert into laptop14_library.tbl_books values (701,'Patrick Radden Keefe','Empire of Pain',16,31);
+insert into laptop14_library.tbl_books values (702,'Becky Cooper','We Keep the Dead Close',16,27);
+insert into laptop14_library.tbl_books values (703,'Casey Cep','Furious Hours',16,51);
+insert into laptop14_library.tbl_books values (704,'John Carreyrou','Bad Blood',16,29);
+insert into laptop14_library.tbl_books values (705,'Elon Green','Last Call',16,25);
+insert into laptop14_library.tbl_books values (706,'Rachel Monroe','Savage Appetites',16,16);
+
+
+insert into laptop14_library.tbl_books values (800,'James Patterson','I, Alex Cross',17,21);
+insert into laptop14_library.tbl_books values (801,'Anne Frank','The Diary of Anne Frank',17,5);
+
+
+--Accounts table
+
+insert into tbl_accounts values (1,'James','Scott',17,'james.scott@mail.com','0712345678');
+insert into tbl_accounts values (2,'Kate','Smith',27,'kate.smith@mail.com','0712345654');
+insert into tbl_accounts values (3,'Michael','Taylor',21,'michael.taylor@mail.com','0712345623');
+insert into tbl_accounts values (4,'Lena','White',40,'lena.white@mail.com','0712345689');
+insert into tbl_accounts values (5,'Kevin','Wood',34,'kevinwood@mail.com','0712345643');
+insert into tbl_accounts values (6,'Tom','Byrne',60,'tom.byrne@mail.com','0712345624');
+insert into tbl_accounts values (7,'Allen','Lee',55,'allen.lee@mail.com','0712345676');
+insert into tbl_accounts values (8,'Lucy','Green',39,'lucy.green@mail.com','0712345612');
+insert into tbl_accounts values (9,'Nick','Johnson',20,'nick.johnson@mail.com','0712345611');
+insert into tbl_accounts values (10,'Nicole','Barr',24,'nicole.barr@mail.com','0712345623');
+insert into tbl_accounts values (11,'Susan','Connor',43,'susan.connor@mail.com','0712345633');
+insert into tbl_accounts values (12,'Roger','Kings',37,'roger.kings@mail.com','0712345650');
+insert into tbl_accounts values (13,'Melvin','Stone',61,'melvin.stone@mail.com','0712345695');
+
+insert into tbl_accounts values (14,'Casey','Cep',24,'casey.cep@mail.com','0754345695');
+insert into tbl_accounts values (15,'James','Scott',18,'james.scott123@mail.com','0712345603');
+
+
+
+--Book Rentals table
+insert into laptop14_library.tbl_book_rentals values (1,800,'2022-06-11','2022-06-16','return after 5 days');
+insert into laptop14_library.tbl_book_rentals values (1,701,'2022-06-11','2022-06-21','return after 10 days');
+
+insert into laptop14_library.tbl_book_rentals values (2,400,'2022-07-11',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (2,500,'2022-07-01','2022-07-08','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (2,702,'2022-06-01','2022-06-06','return after 5 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (3,504,'2022-06-15','2022-06-22','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (3,706,'2022-06-11','2022-06-30','return after 19 days');
+insert into laptop14_library.tbl_book_rentals values (3,301,'2022-06-05','2022-06-20','return after 15 days');
+insert into laptop14_library.tbl_book_rentals values (3,704,'2022-06-13',null,'return after 60 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (4,800,'2022-07-02','2022-07-10','return after 8 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (5,301,'2022-06-11',null,'return after 50 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (6,201,'2022-07-11',null,'return after 15 days');
+insert into laptop14_library.tbl_book_rentals values (6,202,'2022-07-11',null,'return after 15 days');
+insert into laptop14_library.tbl_book_rentals values (6,203,'2022-07-01',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (6,504,'2022-07-03','2022-07-10','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (6,602,'2022-07-03','2022-07-10','return after 7 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (7,203,'2022-07-04','2022-07-10','return after 6 days');
+insert into laptop14_library.tbl_book_rentals values (7,400,'2022-07-01','2022-07-10','return after 9 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (8,101,'2022-07-12',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (8,102,'2022-07-12',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (8,704,'2022-07-12',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (8,502,'2022-07-12',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (8,202,'2022-07-12',null,'return after 10 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (9,101,'2022-06-20','2022-06-25','return after 5 days');
+insert into laptop14_library.tbl_book_rentals values (9,503,'2022-06-25','2022-06-30','return after 5 days');
+insert into laptop14_library.tbl_book_rentals values (9,702,'2022-06-30','2022-07-10','return after 10 days');
+
+insert into laptop14_library.tbl_book_rentals values (10,602,'2022-07-01',null,'return after 25 days');
+insert into laptop14_library.tbl_book_rentals values (10,200,'2022-07-05','2022-07-16','return after 11 days');
+
+insert into laptop14_library.tbl_book_rentals values (11,504,'2022-06-02','2022-06-10','return after 8 days');
+insert into laptop14_library.tbl_book_rentals values (11,600,'2022-06-02','2022-06-10','return after 8 days');
+insert into laptop14_library.tbl_book_rentals values (11,602,'2022-06-05','2022-06-20','return after 15 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (12,100,'2022-07-11',null,'return after 15 days');
+
+insert into laptop14_library.tbl_book_rentals values (13,300,'2022-07-07','2022-07-10','return after 3 days');
+insert into laptop14_library.tbl_book_rentals values (13,601,'2022-07-05','2022-07-11','return after 6 days');
+insert into laptop14_library.tbl_book_rentals values (13,500,'2022-07-02','2022-07-12','return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (13,101,'2022-07-03','2022-07-13','return after 10 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (14,102,'2022-07-11',null,'return after 10 days');
+insert into laptop14_library.tbl_book_rentals values (14,301,'2022-07-11',null,'return after 15 days');
+
+insert into laptop14_library.tbl_book_rentals values (15,402,'2022-06-17','2022-06-24','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (15,501,'2022-06-20','2022-06-26','return after 6 days');
+insert into laptop14_library.tbl_book_rentals values (14,703,'2022-06-20','2022-06-26','return after 6 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (16,500,'2022-06-07','2022-06-16','return after 9 days');
+insert into laptop14_library.tbl_book_rentals values (16,602,'2022-06-07','2022-06-16','return after 9 days');
+insert into laptop14_library.tbl_book_rentals values (16,301,'2022-06-09','2022-06-16','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (16,202,'2022-06-09','2022-06-16','return after 7 days');
+insert into laptop14_library.tbl_book_rentals values (16,401,'2022-06-10','2022-06-16','return after 6 days');
+insert into laptop14_library.tbl_book_rentals values (16,800,'2022-06-10','2022-06-16','return after 6 days');
+
+
+insert into laptop14_library.tbl_book_rentals values (17,103,'2022-06-23','2022-06-27','return after 4 days');
+insert into laptop14_library.tbl_book_rentals values (17,402,'2022-06-24','2022-06-28','return after 4 days');
+insert into laptop14_library.tbl_book_rentals values (17,706,'2022-06-25','2022-06-29','return after 4 days');
+
+
+
+SELECT '2022-07-14'::date;
+SELECT to_date(('14-07-2022'),('dd-mm-yyyy'));
+
+SELECT MIN(age) AS min_age, MAX(age)AS max_age FROM tbl_accounts;
+SELECT AVG(age) AS average_age FROM tbl_accounts;
+SELECT SUM(amount) FROM tbl_books;
+
+SELECT COUNT(*), date_rented,date_returned
+FROM tbl_book_rentals
+GROUP BY date_rented,date_returned HAVING COUNT(*)>=5;
+
+SELECT acc.account_id 
+FROM tbl_accounts acc
+INNER JOIN tbl_book_rentals rnts
+ON acc.account_id = rnts.account_id;
+
+SELECT books.book_id, gnr.name
+FROM tbl_books books
+LEFT JOIN tbl_genres gnr
+ON books.genre_id = gnr.genre_id; 
+
+SELECT books.book_id, rntls.details
+FROM tbl_books books
+RIGHT JOIN tbl_book_rentals rntls
+ON books.book_id = rntls.book_id;
+
+SELECT acc.*,rntls.*
+FROM tbl_accounts acc
+FULL OUTER JOIN tbl_book_rentals rntls
+ON acc.account_id = rntls.account_id;
+
+
+/*
+1. Get the list with FULL NAMES and ages of the accounts ordered by age.
+2. Get the number of rentals (per day) from the last 10 days in descending order (by the number of rental).
+3. Create a query to display all the Romance authors (without duplicates) in ascending order.
+4. Get the list of the emails, book_names, return_date for the accounts that rented a book yesterday, yesterday -1 . 
+5. Get all the rentals for the book_ids and titles that were rented at least twice
+6. Select all the accounts and all the rentals. (without acc id 16,17)
+7. Get the total number of rentals for each genre. 
+8. Find all the authors that also rented books from the same library.
+9. Get the total number of accounts grouped by the first letter of their last name in alphabetical order.
+10. Get the total number of characters, display the 4th  word and replace it with â€˜Janeâ€™ for the title = â€˜The Diary of Anne Frankâ€™
+11. Find all the email addresses of the accounts that were registered multiple times (based on their full names)
+12. A rare book is one for which the library has at most 3 copies (amount field). Please write the SQL that returns all the accounts (Name, Email, Phone Number) that have at least 2 rare books rented not returned.
+*/
+
+//10
+SELECT len(bk.title),SPLIT_PART(bk.title, ' '
+FROM tbl_books bk
+WHERE book_id = 801;
+
+SELECT  SPLIT_PART(bk.book
+
+
+
+//1
+SELECT CONCAT(CONCAT(first_name,' '::text),last_name)
+FROM tbl_accounts acc
+ORDER BY age;
+
+SELECT concat(first_name, concat(' ', last_name)) AS full_name,age
+FROM tbl_Accounts ORDER BY age;
+
+SELECT concat(concat(first_name,'aaab'::text) , last_name) FROM tbl_accounts;
+
+select concat('December 25, ', '2008');
+
+//2
+SELECT COUNT(*) FROM tbl_book_rentals GROUP BY date_rented ORDER BY 1 DESC LIMIT 10;
+
+//3
+SELECT author
+FROM tbl_books books
+INNER JOIN tbl_genres  gnr
+ON books.genre_id = gnr.genre_id
+GROUP BY books.author,gnr.name
+HAVING gnr.name = 'Romance'
+ORDER BY books.author ASC;
+
+//4
+SELECT acc.email,books.title,rn.date_returned,rn.date_rented
+FROM tbl_book_rentals rn
+INNER JOIN tbl_accounts acc 
+ON acc.account_id = rn.account_id
+INNER JOIN tbl_books books 
+ON books.book_id = rn.book_id
+WHERE rn.date_rented = current_date-2;
+
+SELECT current_date-2;
+
+//5
+SELECT * FROM tbl_book_rentals;
+
+SELECT rn.book_id, bk.title, COUNT(*)
+FROM tbl_book_rentals rn
+LEFT JOIN tbl_books bk
+ON rn.book_id = bk.book_id
+GROUP BY 1,2
+HAVING COUNT(*) >=2;
+
+//6
+SELECT acc.*, rn.*
+FROM tbl_accounts acc
+FULL JOIN tbl_book_rentals rn
+ON acc.account_id = rn.account_id
+WHERE acc.account_id != 16 AND acc.account_id != 17;
+
+//7
+SELECT gn.name,COUNT(*) 
+FROM tbl_books bk
+INNER JOIN tbl_book_rentals rn ON rn.book_id = bk.book_id
+INNER JOIN tbl_genres gn ON bk.genre_id = gn.genre_id 
+GROUP BY gn.name;
+
+//8
+
+SELECT author 
+FROM tbl_books bk
+INNER JOIN tbl_accounts acc
+ON bk.author = concat(acc.first_name, concat(' ', acc.last_name))
+INNER JOIN tbl_book_rentals rn
+ON bk.book_id = rn.book_id
+WHERE bk.author = concat(acc.first_name, concat(' ', acc.last_name));
+
+//9
+SELECT COUNT(acc.account),acc.last_name
+FROM tbl_accounts acc
+ORDER BY 1,ASC
+GROUP BY acc.last_name ;
+
+SELECT COUNT(acc.account_id), left(acc.last_name,1) first_letter
+FROM tbl_accounts acc
+GROUP BY 2
+ORDER BY 2 ASC;
+
+
+
+
+
+CREATE TABLE tbl_books_dimension(
+        book_id_sk INT IDENTITY(1,1),
+        book_id INT,
+        author VARCHAR(50),
+        title VARCHAR(100),
+        publisher VARCHAR(50),
+        genre_id INT,
+        price INT,
+        quantity INT);
+        
+DROP TABLE tbl_books_dimension;
+        
+INSERT INTO tbl_books_dimension(book_id, author, title, publisher, genre_id, price, quantity) VALUES(1, 'Sven Hassel', 'Gestapo', 'Humanitas','1',19.00, 70);
+INSERT INTO tbl_books_dimension(book_id, author, title, publisher, genre_id, price, quantity) VALUES(2, 'Mircea Eliade', 'Romanul adolescentului miop', 'Editura 13','2',18.00, 60);
+
+
+
+CREATE TABLE tbl_genres_dimension(
+        genre_id_sk INT IDENTITY(1,1),
+        genre_id INT,
+        name VARCHAR(15),
+        description VARCHAR(30)
+);
+
+INSERT INTO tbl_genres_dimension(genre_id,name, description) VALUES (1, 'War','War time books');
+INSERT INTO tbl_genres_dimension(genre_id,name, description) VALUES (2, 'Classic','Classic books');
+INSERT INTO tbl_genres_dimension(genre_id, name, description) VALUES (3, 'Autobiography','Autobiographic books');
+INSERT INTO tbl_genres_dimension(genre_id, name, description) VALUES (4, 'Drama','Drama books');
+
+CREATE TABLE tbl_book_rentals_fact(
+        event_date DATE,
+        event_type VARCHAR(10),
+        details VARCHAR(20),
+        account_sk INT,
+        account_id INT,
+        book_sk INT);
+        
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-12','RENTAL','-', 1, 1, 2);
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-28','RETURNED','return', 1, 1, 2);
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-12','RENTAL','-', 4, 4, 1);
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-30','RETURN','return', 4, 4, 1);
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-11','RENTAL','-', 2, 2, 3);
+INSERT INTO tbl_book_rentals_fact(event_date, event_type, details, account_id, account_sk, book_sk) VALUES ('2022-07-23','RETURN','return', 2, 2, 3);
+
+
+SELECT * FROM tbl_book_rentals_fact;
+
+UPDATE tbl_book_rentals_fact
+SET event_type = 'RETURN' WHERE event_date = '2022-07-28'; 
+
+SELECT DISTINCT tbd.author
+FROM tbl_books_dimension tbd
+INNER JOIN tbl_book_rentals_fact tbf
+ON  tbd.book_id_sk = tbf.book_sk
+WHERE tbd.book_id_sk = 2;
+
+
+CREATE TABLE dim_accounts(
+        account_sk INT IDENTITY(1,1),
+        account_id INT,
+        fname VARCHAR(20),
+        lname VARCHAR(20),
+        date_of_birth DATE,
+        address VARCHAR(50),
+        old_address VARCHAR(50),
+        current_yn BOOLEAN,
+        start_date DATE,
+        end_date DATE);
+        
+ALTER TABLE dim_accounts
+ADD COLUMN modif_date DATE;
+        
+INSERT INTO dim_accounts(account_id, fname, date_of_birth, address, modif_date)
+SELECT t.account_id, t.first_name, t.date_of_birth, t.address, modif_date
+FROM bootcamp_examples.tbl_accounts t;
+
+INSERT INTO dim_accounts(account_id, fname, date_of_birth, address, old_address, current_yn, start_date, end_date, modif_date)
+SELECT t.account_id, t.first_name, t.date_of_birth, t.address,NULL,'Y',t.modif_date,'2099-1-1', t.modif_date
+FROM bootcamp_examples.tbl_accounts t;
+
+UPDATE bootcamp_examples.tbl_accounts
+SET address = 'str. paris' WHERE account_id = 1;
+
+INSERT INTO dim_accounts(account_id, fname, date_of_birth, address, old_address, current_yn, start_date, end_date, modif_date)
+VALUES (1,'ion','2022-1-1','str. paris', null, true, '2022-3-1', null, '2022-3-1');
+
+
+UPDATE dim_accounts 
+SET current_yn = FALSE 
+WHERE start_date < (SELECT MAX(start_date) FROM dim_accounts d WHERE d.account_id = d.account_id);
+
+UPDATE  dim_accounts oldd SET  oldd.end_date = 
+(SELECT address FROM dim_accounts d WHERE start_date = (SELECT max(start_date) FROM dim_account WHERE d.account_id = d.account_id);
+
+
+
+
+
+
+
+SELECT * FROM dim_accounts;
+
+CREATE USER user14 PASSWORD 'Parola14';
+
+
+SELECT * FROM pg_group;
+
+GRANT SELECT ON dim_accounts TO group bootcamp2022;
+REVOKE SELECT ON dim_accounts FROM group bootcamp2022;
+
+CREATE VIEW vw_acc AS
+SELECT d.account_id, d.fname
+FROM dim_accounts d;
+
+GRANT SELECT ON vw_acc TO GROUP bootcamp2022;
+
+SELECT * 
+FROM tbl_accounts a LEFT JOIN tbl_book_rentals r ON a.account_id = r.account_id ;
+WHERE r.date_rented IS NULL;
+
+SELECT * 
+FROM tbl_accounts a RIGHT JOIN tbl_book_rentals r ON a.account_id = r.account_id 
+WHERE a.first_name IS NULL;
+
+
+SELECT a.account_id,a.first_name, a.last_name, a.phone_number, r.book_id
+FROM tbl_accounts a
+INNER JOIN tbl_book_rentals r ON a.account_id = r.account_id
+WHERE r.date_returned IS NULL;
+
+
+ALTER SCHEMA laptop14_library RENAME TO l14_schema;
+
+SELECT * FROM SVV_SCHEMA_QUOTA_STATE;
+
+SELECT * FROM PG_user;
+
+
+
+/*create a new schema */
+CREATE schema
+IF NOT EXISTS test_schema;
+COMMIT;
+/*check if the schema has specified a quota*/
+SELECT
+    *
+FROM
+    SVV_SCHEMA_QUOTA_STATE;
+    
+    
+/*sample alter schema name*/   
+ALTER schema test_schema RENAME TO test_schema14 ;
+COMMIT;
+/*sample for quota applied on Schema*/
+ALTER schema test_schema14 quota 2GB;
+/*grant usage on schema to group/user*/
+GRANT USAGE ON SCHEMA test_schema14 to group bootcamp2022;
+
+SELECT COUNT(1)
+FROM test_rs_00.rs_sample_encode;
+
+SELECT COUNT(1)
+FROM test_rs_00.rs_sample_pk;
+
+SELECT count(1),COUNT(100),SUM(1),sum(100)
+FROM laptop5_library.dim_accounts a;
+
+CREATE TEMPORARY TABLE tbl_temp_accounts_3 AS SELECT b.book_id, b.author, b.title FROM  tbl_books b;
+
+SELECT * FROM tbl_temp_accounts_3;
+
+
+
+
+CREATE TABLE
+    l14_schema.rs_sample_pk
+    (
+        client_id INTEGER,
+        client_first_name VARCHAR(100),
+        client_last_name VARCHAR(100),
+        load_tsp DATETIME DEFAULT SYSDATE,
+        PRIMARY KEY(client_id)
+    ) ;
+INSERT
+INTO
+    rs_sample_pk
+    (
+        client_id,
+        client_first_name,
+        client_last_name
+    )
+    VALUES
+    (
+        1,
+        'Ion',
+        'Nicolae'
+    )
+    ,
+    (
+        2,
+        'Agache',
+        'Ionel'
+    )
+    ,
+    (
+        3,
+        'velicu',
+        'Mihai'
+    )
+    ,
+    (
+        4,
+        'Floricel',
+        'Catalina'
+    )
+    ,
+    (
+        1,
+        'Gheorghe',
+        'Vasile'
+    )
+    ,
+    (
+        1,
+        'Paisa',
+        'Razvan'
+    )
+    ,
+    (
+        2,
+        'Fono',
+        'Ilie'
+    ) ;
+SELECT
+    COUNT(1)
+FROM
+    rs_sample_pk;
+SELECT
+    *
+FROM
+    rs_sample_pk;
+SELECT
+    client_id, COUNT(1)
+FROM
+    rs_sample_pk
+GROUP BY
+    client_id
+HAVING
+    COUNT(1) > 1;
+SELECT
+    *
+FROM
+    rs_sample_pk
+WHERE
+    client_id IN(1,
+                 2) ;
+/**sample of using PK as unique key, but not enforced*/
+SELECT
+    s.*
+FROM
+    rs_sample_pk s
+WHERE
+    client_id IN
+    (
+     SELECT
+            client_id
+       FROM
+            rs_sample_pk
+   GROUP BY
+            client_id
+     HAVING
+            COUNT(1) > 1) ;
+            
+            
+            
+//
+ALTER TABLE
+    l14_library.tb_dim_books ;
+SELECT
+    *
+FROM
+    pg_table_def
+WHERE
+    tablename = 'dim_accounts';
+CREATE TABLE
+    tbl_sort_csk
+    (
+        LIKE liviu_library.tb_dim_books including defaults
+    ) ;
+SELECT
+    *
+FROM
+    tbl_sort_csk ;
+ALTER TABLE
+    tbl_sort_csk ALTER COMPOUND SORTKEY(book_id, book_sk, genre_id) ;
+SELECT * FROM pg_table_Def
+WHERE tablename = 'tbl_sort_csk';
+    
+INSERT INTO tbl_sort_csk(
+book_sk,
+book_id,
+author,
+title,
+genre_id,
+amount,
+first_date,
+end_date
+)
+SELECT book_sk,
+book_id,
+author,
+title,
+genre_id,
+amount,
+first_date,
+end_date
+FROM liviu_library.tb_dim_books;
+SELECT * FROM tbl_sort_csk;
+--create table
+CREATE TABLE
+    tbl_sort_isk
+    (
+        LIKE liviu_library.tb_dim_books including defaults
+    ) ;
+ALTER TABLE
+    tbl_sort_isk ALTER SORTKEY(book_id, book_sk) ;
+    
+    
+INSERT INTO tbl_sort_isk(
+book_sk,
+book_id,
+author,
+title,
+genre_id,
+amount,
+first_date,
+end_date
+)
+SELECT book_sk,
+book_id,
+author,
+title,
+genre_id,
+amount,
+first_date,
+end_date
+FROM liviu_library.tb_dim_books;
+SELECT * FROM tbl_sort_isk;
+
+SELECT * FROM pg_table_Def
+WHERE tablename = 'tbl_sort_isk';
+
+
+
+//
+CREATE TABLE
+    test_dist_all
+    (
+        _key INT,
+        _value VARCHAR(2)
+    )
+    diststyle ALL;
+CREATE TABLE
+    test_dist_even
+    (
+        _key INT,
+        _value VARCHAR(2)
+    )
+    diststyle even;
+CREATE TABLE
+    test_dist_key_num
+    (
+        _key NUMERIC,
+        _value VARCHAR(2)
+    )
+    diststyle KEY distkey
+    (
+        _key
+    ) ;
+CREATE TABLE
+    test_dist_key_int
+    (
+        _key INT,
+        _value VARCHAR(2)
+    )
+    diststyle KEY distkey
+    (
+        _key
+    ) ;
+CREATE TABLE
+    test_dist_key_bigint
+    (
+        _key bigint,
+        _value VARCHAR(2)
+    )
+    diststyle KEY distkey
+    (
+        _key
+    ) ;
+CREATE TABLE
+    test_dist_key_bigint_sortkey
+    (
+        _key bigint,
+        _value VARCHAR(2)
+    )
+    diststyle KEY distkey
+    (
+        _key
+    )
+    sortkey
+    (
+        _key
+    ) ;
+CREATE TABLE
+    test_dist_key_int_sortkey
+    (
+        _key INT,
+        _value VARCHAR(2)
+    )
+    diststyle KEY distkey
+    (
+        _key
+    )
+    sortkey
+    (
+        _key
+    ) ;
+analyze test_dist_even;
+analyze test_dist_key_num;
+analyze test_dist_key_int;
+analyze test_dist_key_bigint;
+analyze test_dist_key_int_sortkey;
+analyze test_dist_key_bigint_sortkey;
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_even t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._value = t2._value) ;
+/* XN Hash Join DS_DIST_BOTH  (cost=15.00..19201542.00 rows=7200 width=8) */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_even t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._key = t2._key) ;
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_all t1
+JOIN
+    test_dist_even t2
+ ON
+    (
+        t1._key = t2._key) ;
+/* XN Hash Join DS_DIST_ALL_NONE  (cost=15.00..1542.00 rows=7200 width=8) */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_all t1
+JOIN
+    test_dist_key_num t2
+ ON
+    (
+        t1._key = t2._key) ;
+/* XN Hash Join DS_DIST_ALL_NONE  (cost=15.00..2487.50 rows=6000 width=21) */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_all t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._key = t2._key) ;
+/* XN Hash Join DS_DIST_ALL_NONE  (cost=15.00..1542.00 rows=7200 width=8) */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_even t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._key = t2._key) ;
+/* XN Hash Join DS_DIST_OUTER  (cost=15.00..4801542.00 rows=7200 width=8) */
+explain
+SELECT
+    t1._key
+FROM
+    test_dist_even t1;
+/* XN Seq Scan on test_dist_even t1  (cost=0.00..12.00 rows=1200 width=4) */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_key_num t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._key = t2._key) ;
+/*  XN Hash Join DS_BCAST_INNER  (cost=15.00..144002487.50 rows=6000 width=21)  */
+/* Note that casting the column does not improve the situation in this case - dist outer is better, but not what we are expecting */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_key_num t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        CAST(t1._key AS INT) = t2._key) ;
+/* XN Hash Join DS_DIST_OUTER  (cost=15.00..11669154.17 rows=6000 width=21) */
+/* But changing the type of the column does */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_key_bigint t1
+JOIN
+    test_dist_key_int t2
+ ON
+    (
+        t1._key = t2._key) ;
+/*   XN Hash Join DS_DIST_NONE  (cost=15.00..1452.92 rows=6780 width=12)  */
+explain
+SELECT
+    t1._key,
+    t2._key
+FROM
+    test_dist_key_bigint_sortkey t1
+JOIN
+    test_dist_key_int_sortkey t2
+ ON
+    (
+        t1._key = t2._key) ;
+/* Merge Join */
+
+
+//25.07.2022
+
+
+
+
+SELECT * FROM pg_group;
+
+
+/*alter table adding new column, default column*/
+ALTER TABLE
+    tbl_accounts ADD column updated_datetime DATETIME DEFAULT SYSDATE;
+COMMIT;
+SELECT * FROM tbl_accounts;
+?
+/*create views*/
+CREATE OR REPLACE VIEW
+    vw_accounts AS
+SELECT
+    *
+FROM
+    tbl_accounts;
+COMMIT;
+?
+GRANT
+SELECT
+ ON
+    vw_accounts TO GROUP bootcamp2022;
+/*grant select on view*/
+GRANT
+SELECT
+ ON
+    vw_accounts TO GROUP bootcamp2022_01;
+	
+/*revoke grants*/
+?
+REVOKE 
+SELECT
+ ON
+    vw_accounts
+FROM
+    group bootcamp2022;
+    
+SELECT * FROM test_rs_00.vw_accounts;
+
+
+SELECT COUNT(*) FROM bootcamp_rs.tbl_sales;
+
+SELECT DISTINCT s.product_type
+FROM bootcamp_rs.tbl_sales s
+LIMIT 10;
+
+
+SELECT COUNT(s.sales_status), s.country_code
+FROM bootcamp_rs.tbl_sales s
+GROUP BY s.country_code
+ORDER BY 1 DESC;
+
+SELECT COUNT(time_ref), product_type
+FROM bootcamp_rs.tbl_sales s
+GROUP BY product_type
+
+SELECT COUNT(DISTINCT sales_status) FROM bootcamp_rs.tbl_sales s
+
+
+SELECT s.time_ref, s.country_code, s.sales_status, SUM(s.sales_status) OVER (PARTITION BY s.time_ref) AS total_sales
+FROM bootcamp_rs.tbl_sales s;
+
+
+
+
+show table bootcamp_rs.tbl_sales;
+
+CREATE TABLE tbl_pets
+(
+        pet_id INT PRIMARY KEY,
+        specie VARCHAR(20),
+        descr VARCHAR(50),
+        is_domestic_yn CHAR(1)
+        ) SORTKEY(pet_id);
+        
+CREATE TABLE tbl_sales
+(
+        sale_id INT IDENTITY(1,1) PRIMARY KEY DISTKEY,
+        price FLOAT,
+        sale_date DATE,
+        customer_id INT,
+        unique_pet_id INT
+        ) SORTKEY(sale_date);
+        
+CREATE TABLE tbl_stock(
+        unique_pet_id INT IDENTITY(1,1) PRIMARY KEY DISTKEY,
+        pet_name VARCHAR(20),
+        weight FLOAT,
+        colour VARCHAR(10),
+        gender_fm CHAR(1),
+        pet_id INT,
+        date_added DATE) SORTKEY( date_added);
+        
+INSERT INTO tbl_pets(pet_id, specie, descr, is_domestic_yn) VALUES (1, 'dog', 'canine, 4 legs 0 wings', 'y');
+INSERT INTO tbl_pets(pet_id, specie, descr, is_domestic_yn) VALUES (2, 'cat', 'feline, 4 legs 0 wings', 'y');
+INSERT INTO tbl_pets(pet_id, specie, descr, is_domestic_yn) VALUES (3, 'griffon', 'something, 4 legs 2 wings', 'n');
+
+UPDATE tbl_pets
+SET pet_id = 2 WHERE  specie = 'cat';
+
+SELECT * FROM tbl_pets;
+
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('maya', '50', 'white', 'f', 1, '2019-10-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('novac', '10', 'grey', 'm', 1, '2022-03-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('tina', '10', 'black', 'f', 1, '2022-03-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('vika', '5', 'brown', 'f', 1, '2022-01-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('eli', '2', 'white', 'f', 2, '2020-10-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('vasile', '500', 'blonde', 'm', 3, '1899-10-1');
+INSERT INTO tbl_stock(pet_name, weight, colour, gender_fm, pet_id, date_added) VALUES ('papi', '20', 'grey', 'm', 1, '2022-07-29');
+
+
+SELECT * FROM tbl_stock;
+
+
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (200, '2019-10-1', 1199, 1);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (100, '2022-03-1', 1199, 2);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (100, '2022-03-1', 1199, 3);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (150, '2022-01-1', 1199, 4);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (90, '2020-10-1', 1254, 5);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (1000, '1899-10-1', 132, 6);
+INSERT INTO tbl_sales(price, sale_date, customer_id, unique_pet_id) VALUES (270, '2022-07-29', 1241, 7);
+
+
+SELECT * FROM tbl_sales;
+
+SELECT COUNT(DISTINCT specie)
+FROM tbl_pets
+
+//numele animalelor cumparate saptamana trecuta care sunt domestice
+SELECT s.pet_name 
+FROM tbl_stock s
+INNER JOIN tbl_sales sl ON s.unique_pet_id = sl.unique_pet_id
+INNER JOIN tbl_pets p ON s.pet_id = p.pet_id
+WHERE sl.sale_date >= date_trunc('week', current_date) - interval '1 week' AND sl.sale_date<= date_trunc('week', current_date) AND p.is_domestic_yn = 'y';
+
+// greutatea totala a cainilor
+SELECT SUM(s.weight) total_weight,
+CASE
+        WHEN total_weight > 10 THEN 'peste 10'
+        WHEN total_weight < 10 THEN 'sub 10'
+        ELSE 'fix 10'
+END
+FROM tbl_stock s
+INNER JOIN tbl_pets p ON s.pet_id = p.pet_id
+WHERE p.pet_id = 1;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
